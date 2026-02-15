@@ -23,6 +23,21 @@ public class Menu {
     }
     
     public static void opcionAgregarAnimal() {
-        
+        // Método para mostrar opción de agregar animales
+    }
+    public static void opcionEliminarAnimal() {
+        // Método para mostrar opción de eliminar animales
+    }
+    public static void opcionAsignarAnimal() {
+        // Método para mostrar opción de asignar animales a los recintos
+    }
+    public static void opcionMoverAnimal() {
+        // Método para mostrar opción de mover animales
+    }
+    public static void opcionBuscarAnimal() {
+        // Método para mostrar opción de buscar animales
+    }
+    public static void opcionReporte() {
+        // Método para mostrar opción de generar reporte
     }
 }
