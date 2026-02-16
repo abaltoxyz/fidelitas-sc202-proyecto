@@ -6,12 +6,13 @@ package grupo28_proyecto;
 
 /**
  *
- * @author AndrésBaltodano
+ * Un objeto Usuario que representa los diferentes usuarios autorizados a utilizar el sistema.
  */
 public class Usuario {
-    int idUsuario;
+    int idUsuario; // Identificador único del usuario.
     String nombreUsuario;
     String contrasena;
+    boolean sesionActiva; // Se asigna True si las credenciales son correctas, y se procede con el resto del programa.
     
     public static void iniciarSesion() {
         // Método para comprobar credenciales e iniciar sesión

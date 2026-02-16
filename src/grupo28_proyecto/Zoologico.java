@@ -6,13 +6,13 @@ package grupo28_proyecto;
 
 /**
  *
- * @author AndrésBaltodano
+ * Un objeto Zoologico que representa el espacio físico en donde se encuentran los diferentes recintos, y en ellos los distintos animales.
  */
 public class Zoologico {
-    int idZoologico;
+    int idZoologico; // Identificador único del zoológico.
     String nombreZoologico;
-    String localidadZoologico;
-    int capacidad;
+    String localidadZoologico; // La dirección o lugar donde se encuentra.
+    int capacidad; // No será posible que se acepte el registro de animales si la capacidad máxima se ha alcanzado.
     
     public static void agregarAnimal() {
         // Método para agregar un animal al zoológico
