@@ -1,19 +1,50 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package grupo28_proyecto;
 
 /**
- *
- * Un objeto Recinto que representa las diferentes ubicaciones o hábitats donde se pueden asignar los animales.
+ * Representa un recinto dentro del zoológico.
+ * Cada recinto tiene un identificador, un nombre y una posición.
+ * 
+ * @author Wilton Rivera
  */
 public class Recinto {
-    int idRecinto; // Identificador único del recinto.
-    String nombreRecinto;
-    String posicionRecinto; // La posición dentro de la cuadrícula definida. Se espera un formato tipo A1, B2, C3, etc.
-    
-    public static void mostrarInfo() {
-        // Método para mostrar información sobre el recinto (posición, animales asignados, cantidad, etc)
+
+    private int idRecinto;
+    private String nombreRecinto;
+    private String posicionRecinto;
+
+    public Recinto(int idRecinto, String nombreRecinto, String posicionRecinto) {
+        this.idRecinto = idRecinto;
+        this.nombreRecinto = nombreRecinto;
+        this.posicionRecinto = posicionRecinto;
+    }
+
+    public int getIdRecinto() {
+        return idRecinto;
+    }
+
+    public void setIdRecinto(int idRecinto) {
+        this.idRecinto = idRecinto;
+    }
+
+    public String getNombreRecinto() {
+        return nombreRecinto;
+    }
+
+    public void setNombreRecinto(String nombreRecinto) {
+        this.nombreRecinto = nombreRecinto;
+    }
+
+    public String getPosicionRecinto() {
+        return posicionRecinto;
+    }
+
+    public void setPosicionRecinto(String posicionRecinto) {
+        this.posicionRecinto = posicionRecinto;
+    }
+
+    public String mostrarInfo() {
+        return "ID Recinto: " + idRecinto
+                + "\nNombre del recinto: " + nombreRecinto
+                + "\nPosición: " + posicionRecinto;
     }
 }
