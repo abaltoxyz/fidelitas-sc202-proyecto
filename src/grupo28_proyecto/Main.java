@@ -16,8 +16,11 @@ I Cuatrimestre 2026
 public class Main {
 
     public static void main(String[] args) {
-        Usuario.iniciarSesion(); // Primero verificar credenciales e iniciar sesión.
-        Menu.desplegarMenu(); // Luego, desplegar el menú de opciones.
+        // Primero verificar credenciales e iniciar sesión. 
+        if (Usuario.iniciarSesion())
+            //TO-DO>>>>>>>>>>>>>Crear zoologico si no existe aun
+            Menu.desplegarMenu();
+
     }
     
 }

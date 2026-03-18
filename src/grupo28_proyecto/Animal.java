@@ -3,19 +3,42 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package grupo28_proyecto;
+import javax.swing.JOptionPane;
 
 /**
  *
- * Un objeto Animal que representa los diferentes animales que poblarán el zoológico.
+ * @author THOTH BRENES MURILLO
  */
-public class Animal {
-    int idAnimal; // Identificador único del animal.
+    public class Animal {
+    int idAnimal;
     short edad;
     String especie;
     String nombreAnimal;
-    int idRecinto; // El id del recinto donde el animal está o estará asignado.
+    double peso;
+    int idRecinto;
     
-    public static void mostrarInfo() {
-        // Método para mostrar información sobre el animal (edad, nombre, especie, posición asignada, etc)
+    
+    public Animal(int idAnimal, String nombreAnimal, String especie, short edad, double peso) {
+        this.idAnimal = idAnimal;
+        this.nombreAnimal = nombreAnimal;
+        this.especie = especie;
+        this.edad = edad;  
+        this.peso = peso; 
+        this.idRecinto = -1; // -1 Cuando no se le ha asignado ningún recinto
+    }
+    
+    
+    
+    //Se mostrara la info del animal como también donde esta:
+    public void mostrarInfo() {
+        String infoAnimal = "ID: " + idAnimal + "\n" // armar String con la info
+                + "Nombre: " + nombreAnimal + "\n"
+                + "Especie: " + especie + "\n"
+                + "Edad: " + edad + "\n"
+                + "Peso: " + peso + "\n"
+                + "Recinto: " + idRecinto + "\n"
+                + "-----------------------";
+
+    JOptionPane.showMessageDialog(null, infoAnimal);
     }
 }
