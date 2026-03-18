@@ -1,111 +1,262 @@
- /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package grupo28_proyecto;
-import javax.swing.JOptionPane;
 
 /**
- *
- * @author THOTH BRENES MURILLO
+ * Representa el zoológico y administra los animales y recintos registrados.
+ * 
+ * @author Wilton Rivera
  */
 public class Zoologico {
-    int idZoologico;
-    String nombreZoologico;
-    String localidadZoologico;
-    int capacidad;
-    static Animal[] listaAnimales = new Animal[45];  //Cantidad maxima del Zoologico será de 45 animales.
-    static int cantidad = 0;
-    static int contadorId = 1;
 
-        // Agregar Animal
-        public static void agregarAnimal(String nombre, String especie, short edad, double peso) {
+    private int idZoologico;
+    private String nombreZoologico;
+    private String localidadZoologico;
+    private int capacidad;
+    private Animal[] animales;
+    private Recinto[] recintos;
+    private int cantidadAnimales;
+    private int cantidadRecintos;
 
-        if (cantidad < listaAnimales.length) {
-
-            Animal nuevo = new Animal(contadorId, nombre, especie, edad, peso);
-            listaAnimales[cantidad] = nuevo;
-
-            cantidad++;
-            contadorId++;
-
-            JOptionPane.showMessageDialog(null, "Animal agregado correctamente."); // mostrar mensaje de confirmación.
-
-        } else {
-            JOptionPane.showMessageDialog(null, "No hay espacio."); // mostrar mensaje de error.
-        }
+    /**
+     * Inicializa el zoológico con sus datos principales y crea los arreglos
+     * de animales y recintos según la capacidad indicada.
+     */
+    public Zoologico(int idZoologico, String nombreZoologico, String localidadZoologico, int capacidad) {
+        this.idZoologico = idZoologico;
+        this.nombreZoologico = nombreZoologico;
+        this.localidadZoologico = localidadZoologico;
+        this.capacidad = capacidad;
+        this.animales = new Animal[capacidad];
+        this.recintos = new Recinto[capacidad];
+        this.cantidadAnimales = 0;
+        this.cantidadRecintos = 0;
     }
-        
-        // Eliminar Animal
-        public static void eliminarAnimal(int id) {
 
-        for (int i = 0; i < cantidad; i++) {
+    public int getIdZoologico() {
+        return idZoologico;
+    }
 
-            if (listaAnimales[i].idAnimal == id) {
+    public void setIdZoologico(int idZoologico) {
+        this.idZoologico = idZoologico;
+    }
 
-                for (int j = i; j < cantidad - 1; j++) {
-                    listaAnimales[j] = listaAnimales[j + 1];
+    public String getNombreZoologico() {
+        return nombreZoologico;
+    }
+
+    public void setNombreZoologico(String nombreZoologico) {
+        this.nombreZoologico = nombreZoologico;
+    }
+
+    public String getLocalidadZoologico() {
+        return localidadZoologico;
+    }
+
+    public void setLocalidadZoologico(String localidadZoologico) {
+        this.localidadZoologico = localidadZoologico;
+    }
+
+    public int getCapacidad() {
+        return capacidad;
+    }
+
+    public void setCapacidad(int capacidad) {
+        this.capacidad = capacidad;
+    }
+
+    public Animal[] getAnimales() {
+        return animales;
+    }
+
+    public Recinto[] getRecintos() {
+        return recintos;
+    }
+
+    public int getCantidadAnimales() {
+        return cantidadAnimales;
+    }
+
+    public int getCantidadRecintos() {
+        return cantidadRecintos;
+    }
+
+    /**
+     * Agrega un recinto al zoológico si todavía hay espacio.
+     */
+    public boolean agregarRecinto(Recinto recinto) {
+        if (recinto == null) {
+            return false;
+        }
+
+        if (cantidadRecintos < recintos.length) {
+            recintos[cantidadRecintos] = recinto;
+            cantidadRecintos++;
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Registra un animal en el zoológico si no se ha alcanzado la capacidad máxima.
+     */
+    public String agregarAnimal(Animal animal) {
+        if (animal == null) {
+            return "Animal inválido.";
+        }
+
+        if (cantidadAnimales < animales.length) {
+            animales[cantidadAnimales] = animal;
+            cantidadAnimales++;
+            return "Animal agregado correctamente.";
+        }
+
+        return "No hay espacio para más animales.";
+    }
+
+    /**
+     * Elimina un animal según su identificador y recorre los elementos
+     * restantes para evitar espacios vacíos en el arreglo.
+     */
+    public String eliminarAnimal(int idAnimal) {
+        for (int i = 0; i < cantidadAnimales; i++) {
+            if (animales[i].getIdAnimal() == idAnimal) {
+                for (int j = i; j < cantidadAnimales - 1; j++) {
+                    animales[j] = animales[j + 1];
                 }
 
-                cantidad--;
-
-                JOptionPane.showMessageDialog(null, "Animal eliminado."); // Mostrar confirmación.
-                return;
-            }
-        }
-        JOptionPane.showMessageDialog(null, "Animal no encontrado.");
-        }
-        
-        // Asignar un animal al recinto
-        public static void asignarAnimal(int idAnimal, int idRecinto) {
-
-        Animal a = buscarAnimal(idAnimal);
-
-        if (a != null) {
-            a.idRecinto = idRecinto;
-            JOptionPane.showMessageDialog(null, "Asignado correctamente.");
-        } else {
-            JOptionPane.showMessageDialog(null, "Animal no encontrado.");
-            System.out.println();
-        }
-    }
-
-        // Mover animal
-        public static void moverAnimal(int idAnimal, int nuevoRecinto) {
-
-        Animal a = buscarAnimal(idAnimal);
-
-        if (a != null) {
-
-            JOptionPane.showMessageDialog(null, "Antes estaba en: " + a.idRecinto);
-
-            a.idRecinto = nuevoRecinto;
-            
-            JOptionPane.showMessageDialog(null, "Movimiento exitoso.");
-
-        } else {
-            JOptionPane.showMessageDialog(null, "Animal no encontrado.");
-        }
-    }
-        // Buscar Animal
-        public static Animal buscarAnimal(int id) {
-
-        for (int i = 0; i < cantidad; i++) {
-
-            if (listaAnimales[i].idAnimal == id) {
-                return listaAnimales[i];
+                animales[cantidadAnimales - 1] = null;
+                cantidadAnimales--;
+                return "Animal eliminado correctamente.";
             }
         }
 
+        return "Animal no encontrado.";
+    }
+
+    /**
+     * Busca un animal por su identificador.
+     */
+    public Animal buscarAnimalPorId(int idAnimal) {
+        for (int i = 0; i < cantidadAnimales; i++) {
+            if (animales[i].getIdAnimal() == idAnimal) {
+                return animales[i];
+            }
+        }
         return null;
     }
-        // Reporte de los animales
-        public static void reporteAnimales() {
 
-        JOptionPane.showMessageDialog(null, "----- REPORTE -----");
-
-        for (int i = 0; i < cantidad; i++) {
-            listaAnimales[i].mostrarInfo();
+    /**
+     * Busca un recinto por su identificador.
+     */
+    public Recinto buscarRecintoPorId(int idRecinto) {
+        for (int i = 0; i < cantidadRecintos; i++) {
+            if (recintos[i].getIdRecinto() == idRecinto) {
+                return recintos[i];
+            }
         }
+        return null;
+    }
+
+    /**
+     * Verifica si un recinto ya tiene un animal asignado.
+     */
+    public boolean recintoOcupado(int idRecinto) {
+        for (int i = 0; i < cantidadAnimales; i++) {
+            if (animales[i].getIdRecinto() == idRecinto) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Asigna un animal a un recinto usando los identificadores de ambos.
+     */
+    public String asignarAnimal(int idAnimal, int idRecinto) {
+        Animal animal = buscarAnimalPorId(idAnimal);
+        Recinto recinto = buscarRecintoPorId(idRecinto);
+
+        if (animal == null) {
+            return "Animal no encontrado.";
+        }
+
+        if (recinto == null) {
+            return "Recinto no encontrado.";
+        }
+
+        if (animal.getIdRecinto() != -1) {
+            return "El animal ya tiene un recinto asignado.";
+        }
+
+        if (recintoOcupado(idRecinto)) {
+            return "El recinto ya está ocupado.";
+        }
+
+        animal.setIdRecinto(idRecinto);
+        return "Animal asignado correctamente al recinto " + recinto.getNombreRecinto() + ".";
+    }
+
+    /**
+     * Cambia un animal de recinto, validando que el nuevo recinto exista
+     * y no esté ocupado.
+     */
+    public String moverAnimal(int idAnimal, int nuevoIdRecinto) {
+        Animal animal = buscarAnimalPorId(idAnimal);
+        Recinto nuevoRecinto = buscarRecintoPorId(nuevoIdRecinto);
+
+        if (animal == null) {
+            return "Animal no encontrado.";
+        }
+
+        if (nuevoRecinto == null) {
+            return "Recinto no encontrado.";
+        }
+
+        if (animal.getIdRecinto() == -1) {
+            return "El animal no tiene un recinto asignado.";
+        }
+
+        if (animal.getIdRecinto() == nuevoIdRecinto) {
+            return "El animal ya se encuentra en ese recinto.";
+        }
+
+        if (recintoOcupado(nuevoIdRecinto)) {
+            return "El recinto nuevo ya está ocupado.";
+        }
+
+        animal.setIdRecinto(nuevoIdRecinto);
+        return "Animal movido correctamente al recinto " + nuevoRecinto.getNombreRecinto() + ".";
+    }
+
+    /**
+     * Busca un animal por su identificador y devuelve su información.
+     */
+    public String buscarAnimal(int idAnimal) {
+        Animal animal = buscarAnimalPorId(idAnimal);
+
+        if (animal != null) {
+            return animal.mostrarInfo();
+        }
+
+        return "Animal no encontrado.";
+    }
+
+    /**
+     * Genera un reporte con todos los animales registrados en el zoológico.
+     */
+    public String reporteAnimales() {
+        String reporte = "=== REPORTE DE ANIMALES ===\n";
+        reporte += "Zoológico: " + nombreZoologico + "\n";
+        reporte += "Localidad: " + localidadZoologico + "\n\n";
+
+        if (cantidadAnimales == 0) {
+            return reporte + "No hay animales registrados.";
+        }
+
+        for (int i = 0; i < cantidadAnimales; i++) {
+            reporte += animales[i].mostrarInfo() + "\n";
+        }
+
+        return reporte;
     }
 }
