@@ -1,26 +1,30 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
 package grupo28_proyecto;
 
-/*
-AVANCE 1: Proyecto de administración de un zoológico
-GRUPO #28: K. Andrés Baltodano Ramírez, Thoth Brenes Murilo, Rivera Guardian Wilton Ezequiel.
-Facultad de Ingeniería, Universidad Fidélitas
-SC-202: Introducción a la Programación con Objetos
-Profesores: Melanie Benavides, Javier Montoya
-I Cuatrimestre 2026
-*/
-
+/**
+ * Clase principal del programa.
+ * Controla el flujo de inicio del sistema.
+ */
 public class Main {
 
     public static void main(String[] args) {
-        // Primero verificar credenciales e iniciar sesión. 
-        if (Usuario.iniciarSesion())
-            //TO-DO>>>>>>>>>>>>>Crear zoologico si no existe aun
-            Menu.desplegarMenu();
 
+        // Crear una instancia del zoológico (puedes cambiar los valores si quieres)
+        Zoologico zoologico = new Zoologico(
+                1,
+                "Zoológico Nacional",
+                "Costa Rica",
+                50 // capacidad máxima
+        );
+
+        // Simulación: agregar algunos recintos de prueba
+        zoologico.agregarRecinto(new Recinto(1, "Recinto A", "Zona Norte"));
+        zoologico.agregarRecinto(new Recinto(2, "Recinto B", "Zona Sur"));
+        zoologico.agregarRecinto(new Recinto(3, "Recinto C", "Zona Este"));
+
+        // Validar login
+        if (Usuario.iniciarSesion()) {
+            // Mostrar menú con el zoológico ya creado
+            Menu.desplegarMenu(zoologico);
+        }
     }
-    
 }
